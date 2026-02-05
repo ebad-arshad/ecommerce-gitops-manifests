@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-root-app
+  namespace: argocd
+spec:
+  project: prod-ecommerce-project
+  
+  source:
+    repoURL: 'https://github.com/ebad-arshad/ecommerce-gitops-manifests'
+    targetRevision: HEAD
+    path: argocd/apps/prod
+    directory:
+      recurse: true
+
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

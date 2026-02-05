@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: dev-ecommerce-project
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Development Ecommerce Project
+
+  sourceRepos:
+  - 'https://github.com/ebad-arshad/ecommerce-gitops-manifests'
+
+  destinations:
+  - namespace: dev-ecommerce
+    server: https://kubernetes.default.svc
+
+  namespaceResourceWhitelist:
+   - group: '*'
+     kind: '*'
+
+  clusterResourceWhitelist:
+    - group: 'argoproj.io'
+      kind: 'Application'

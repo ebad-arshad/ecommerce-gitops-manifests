@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rabbitmq
+  namespace: argocd
+spec:
+  project: dev-ecommerce
+  source:
+    repoURL: 'https://github.com/ebad-arshad/ecommerce-gitops-manifests'
+    path: helm/charts/infrastructure/rabbitmq
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - helm/environments/dev/rabbitmq-values.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: dev-ecommerce
