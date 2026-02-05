@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}
+data:
+  {{- if .Values.db.enabled }}
+  POSTGRES_HOST: postgresql
+  POSTGRES_USER: {{ .Values.db.user }}
+  POSTGRES_DB: {{ .Values.db.name }}
+  POSTGRES_PASSWORD: {{ .Values.db.password }}
+  {{- end }}
+  
+  {{- if .Values.extraEnv }}
+  {{- toYaml .Values.extraEnv | nindent 2 }}
+  {{- end }}

@@ -1,0 +1,56 @@
+# Replica and History Settings
+replicaCount: 1
+revisionHistoryLimit: 3
+
+# Image Settings
+image:
+  name: "ebadarshad/prod-api-gateway:v1.0.0" # repository:tag
+  pullPolicy: IfNotPresent
+
+# Networking
+service:
+  port: 5000
+
+# Ingress Settings
+ingress:
+  enabled: true
+  path: /dev(/|$)(.*) 
+
+# Resources (Must be set for HPA to work)
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "256Mi"
+
+# Health Checks (Probes)
+probes:
+  startupPath: "/apis/healthz"
+  startupDelay: 30
+  livenessPath: "/apis/healthz"
+  livenessDelay: 15
+  readinessPath: "/apis/healthz"
+  readinessDelay: 5
+
+# Horizontal Pod Autoscaler
+hpa:
+  enabled: true # Required for your 'if not' logic in Deployment
+  minReplicas: 2
+  maxReplicas: 5
+  cpu:
+    averageUtilization: 70
+  memory:
+    averageUtilization: 80
+
+# DB Configuration
+db:
+  enabled: false
+
+# Extra Envs
+extraEnv:
+  AUTH_URL: "http://auth:5001"
+  PRODUCT_URL: "http://product:5002"
+  ORDER_URL: "http://order:5003"
+  APP_VERSION: "v1.0.0"
