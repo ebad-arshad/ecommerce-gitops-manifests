@@ -16,16 +16,15 @@ server:
 
 repoServer:
   livenessProbe:
+    enabled: true
+    httpGet:
+      path: /healthz
+      port: 8084
     initialDelaySeconds: 120
+    timeoutSeconds: 15
     periodSeconds: 20
-    timeoutSeconds: 10
     failureThreshold: 5
-  readinessProbe:
-    initialDelaySeconds: 30
-    periodSeconds: 10
-    timeoutSeconds: 10
-    failureThreshold: 3
-
+      
 configs:
   params:
     server.insecure: "true"
