@@ -9,7 +9,7 @@ helm repo update
 helm upgrade --install argocd argo/argo-cd \
   -n $NAMESPACE \
   --create-namespace \
-  -f argocd/argocd-values.yaml
+  -f argocd-values.yaml
 
 until kubectl get secret $SECRET_NAME -n $NAMESPACE > /dev/null 2>&1; do
   echo "waiting for secret to generate..."
