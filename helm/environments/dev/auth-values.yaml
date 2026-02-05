@@ -8,11 +8,9 @@ initContainers:
   name: wait-for-db
   image: busybox:1.28
   command:
-    [
-      "sh",
-      "-c",
-      "until nc -zv postgresql 5432; do echo waiting for db; sleep 2; done;",
-    ]
+    - sh
+    - -c
+    - "until nc -zv postgresql 5432; do echo waiting for db; sleep 2; done;"
 
 # Image Settings
 image:
