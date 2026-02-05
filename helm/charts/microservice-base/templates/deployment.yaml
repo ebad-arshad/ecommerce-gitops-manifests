@@ -33,7 +33,6 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
-
       {{- if .Values.initContainers.enabled }}
       initContainers:
       - name: {{ .Values.initContainers.name }}
@@ -41,7 +40,6 @@ spec:
         command: 
           {{- toYaml .Values.initContainers.command | nindent 10 }}
       {{- end }}
-
       containers:
         - name: {{ .Release.Name }}
           image: {{ .Values.image.name }}
