@@ -11,7 +11,7 @@ spec:
     targetRevision: master
     helm:
       valueFiles:
-        - helm/environments/dev/rabbitmq-values.yaml
+        - ../../../environments/dev/rabbitmq-values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: dev-ecommerce
