@@ -11,7 +11,7 @@ spec:
     targetRevision: master
     helm:
       valueFiles:
-        - ../../../environments/dev/product-values.yaml
+        - ../../environments/dev/product-values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: dev-ecommerce

@@ -11,7 +11,7 @@ spec:
     targetRevision: master
     helm:
       valueFiles:
-        - ../../../environments/dev/api-gateway-values.yaml
+        - ../../environments/dev/api-gateway-values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: dev-ecommerce
