@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: prod-ecommerce
+  name: prod-ecommerce-project
   namespace: argocd
 spec:
   description: Production Ecommerce Project

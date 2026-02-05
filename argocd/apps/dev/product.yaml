@@ -4,7 +4,7 @@ metadata:
   name: product
   namespace: argocd
 spec:
-  project: dev-ecommerce
+  project: dev-ecommerce-project
   source:
     repoURL: 'https://github.com/ebad-arshad/ecommerce-gitops-manifests'
     path: helm/charts/microservice-base
