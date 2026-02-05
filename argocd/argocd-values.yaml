@@ -1,0 +1,33 @@
+global:
+  domain: argocd.local
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/hsts: "false"
+    hosts:
+      - argocd.local
+    paths:
+      - /
+
+repoServer:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+  livenessProbe:
+    initialDelaySeconds: 120 
+    periodSeconds: 20      
+    timeoutSeconds: 10  
+    failureThreshold: 5
+
+configs:
+  params:
+    server.insecure: "true"
