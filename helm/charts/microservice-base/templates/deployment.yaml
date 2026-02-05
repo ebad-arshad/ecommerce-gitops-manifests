@@ -38,7 +38,8 @@ spec:
       initContainers:
       - name: {{ .Values.initContainers.name }}
         image: {{ .Values.initContainers.image }}
-        command: {{ .Values.initContainers.command }}
+        command: 
+          {{- toYaml .Values.initContainers.command | nindent 10 }}
       {{- end }}
 
       containers:
