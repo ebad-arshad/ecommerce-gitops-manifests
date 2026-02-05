@@ -2,6 +2,10 @@
 replicaCount: 1
 revisionHistoryLimit: 3
 
+# Init Container
+initContainers:
+  enabled: false
+
 # Image Settings
 image:
   name: "ebadarshad/prod-api-gateway:v1.0.0" # repository:tag

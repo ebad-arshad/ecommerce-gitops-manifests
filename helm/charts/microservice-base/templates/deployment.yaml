@@ -33,9 +33,14 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
-      {{- if .Values.db.initContainers }}
-      {{- toYaml .Values.initContainers | nindent 2 }}
+
+      {{- if .Values.initContainers.enabled }}
+      initContainers:
+      - name: {{ .Values.initContainers.name }}
+        image: {{ .Values.initContainers.image }}
+        command: {{ .Values.initContainers.command }}
       {{- end }}
+
       containers:
         - name: {{ .Release.Name }}
           image: {{ .Values.image.name }}

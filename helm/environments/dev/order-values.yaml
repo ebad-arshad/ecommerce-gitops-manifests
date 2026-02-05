@@ -4,7 +4,8 @@ revisionHistoryLimit: 3
 
 # Init Container
 initContainers:
-- name: wait-for-db
+  enabled: true
+  name: wait-for-db
   image: busybox:1.28
   command:
     [
