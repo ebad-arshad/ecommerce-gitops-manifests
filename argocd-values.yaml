@@ -15,18 +15,16 @@ server:
       - /
 
 repoServer:
-  resources:
-    requests:
-      cpu: 250m
-      memory: 256Mi
-    limits:
-      cpu: 1000m
-      memory: 1Gi
   livenessProbe:
-    initialDelaySeconds: 120 
-    periodSeconds: 20      
-    timeoutSeconds: 10  
+    initialDelaySeconds: 120
+    periodSeconds: 20
+    timeoutSeconds: 10
     failureThreshold: 5
+  readinessProbe:
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 3
 
 configs:
   params:
