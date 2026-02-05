@@ -1,0 +1,75 @@
+postgresql:
+  nameOverride: "postgresql"
+  fullnameOverride: "postgresql"
+  global:
+    postgresql:
+      auth:
+        database: "postgres"
+        username: "user"
+        password: "password"
+
+  persistence:
+    enabled: true
+    storageClass: "local-path"
+    size: 2Gi
+    accessMode: ReadWriteOnce
+
+  primary:
+    initdb:
+      scripts:
+        init.sh: |
+          #!/bin/bash
+          set -e
+          export PGPASSWORD="$POSTGRES_POSTGRES_PASSWORD"
+          psql -v ON_ERROR_STOP=1 --username "postgres" --dbname "postgres" <<-EOSQL
+            -- AUTH SERVICE
+            CREATE USER auth_user WITH PASSWORD 'auth_pass';
+            CREATE DATABASE auth OWNER auth_user;
+            \c auth
+            GRANT ALL ON SCHEMA public TO auth_user;
+
+            -- PRODUCT SERVICE
+            CREATE USER product_user WITH PASSWORD 'product_pass';
+            CREATE DATABASE product OWNER product_user;
+            \c product
+            GRANT ALL ON SCHEMA public TO product_user;
+
+            -- ORDER SERVICE
+            CREATE USER order_user WITH PASSWORD 'order_pass';
+            CREATE DATABASE "order" OWNER order_user;
+            \c "order"
+            GRANT ALL ON SCHEMA public TO order_user;
+          EOSQL
+
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi" 
+    limits:
+      cpu: "500m" 
+      memory: "512Mi"
+
+  readinessProbe:
+    exec:
+      command:
+        - /bin/sh
+        - -c
+        - exec pg_isready -U "postgres" -d "postgres"
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  livenessProbe:
+    exec:
+      command:
+        - /bin/sh
+        - -c
+        - exec pg_isready -U "postgres" -d "postgres"
+    initialDelaySeconds: 15
+    periodSeconds: 20
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: node-role.kubernetes.io/control-plane
+            operator: DoesNotExist
