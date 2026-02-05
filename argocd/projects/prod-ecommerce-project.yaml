@@ -1,10 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: prod-ecommerce-project
+  name: prod-ecommerce
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   description: Production Ecommerce Project
 

@@ -3,8 +3,6 @@ kind: AppProject
 metadata:
   name: dev-ecommerce-project
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   description: Development Ecommerce Project
 
