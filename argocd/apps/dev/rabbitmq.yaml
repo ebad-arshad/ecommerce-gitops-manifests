@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/ebad-arshad/ecommerce-gitops-manifests'
     path: helm/charts/infrastructure/rabbitmq
-    targetRevision: HEAD
+    targetRevision: master
     helm:
       valueFiles:
         - helm/environments/dev/rabbitmq-values.yaml

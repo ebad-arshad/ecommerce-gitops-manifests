@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/ebad-arshad/ecommerce-gitops-manifests'
     path: helm/charts/microservice-base
-    targetRevision: HEAD
+    targetRevision: master
     helm:
       valueFiles:
         - helm/environments/dev/order-values.yaml
