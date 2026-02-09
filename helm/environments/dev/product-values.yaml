@@ -54,13 +54,6 @@ hpa:
   memory:
     averageUtilization: 80
 
-# # DB Configuration
-# db:
-#   enabled: true
-#   user: product_user
-#   name: product
-#   password: product_pass
-
 # Extra Envs
 extraEnv:
   RABBITMQ_PRODUCT_QUEUE: product
