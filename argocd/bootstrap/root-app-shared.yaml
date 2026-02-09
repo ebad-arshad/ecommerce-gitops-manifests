@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: shared-root-app
+  namespace: argocd
+spec:
+  project: default
+  
+  source:
+    repoURL: 'https://github.com/ebad-arshad/ecommerce-gitops-manifests'
+    targetRevision: master
+    path: argocd/apps/shared
+    directory:
+      recurse: true
+
+  destination:
+    namespace: argocd
+    server: 'https://kubernetes.default.svc'
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
