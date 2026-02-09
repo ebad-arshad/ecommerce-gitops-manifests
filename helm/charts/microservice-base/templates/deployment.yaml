@@ -57,9 +57,11 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}
+            {{- if ne .Release.Name "api-gateway" }}
             - secretRef:
                 name: {{ .Release.Name }}-env
-
+            {{- end }}
+            
           resources:
             requests:
               cpu: {{ .Values.resources.requests.cpu }}
