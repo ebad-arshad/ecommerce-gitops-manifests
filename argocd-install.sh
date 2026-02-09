@@ -22,6 +22,7 @@ echo "---------------------------------------------------"
 echo "Secret found. Extracting password..."
 
 ADMIN_PASSWORD=$(kubectl get secret $SECRET_NAME -n $NAMESPACE -o jsonpath="{.data.password}" | base64 -d)
+# kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
 
 echo "---------------------------------------------------"
 echo "ArgoCD Admin Password: $ADMIN_PASSWORD"
