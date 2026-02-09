@@ -54,12 +54,12 @@ hpa:
   memory:
     averageUtilization: 80
 
-# DB Configuration
-db:
-  enabled: true
-  user: order_user
-  name: order
-  password: order_pass
+# # DB Configuration
+# db:
+#   enabled: true
+#   user: order_user
+#   name: order
+#   password: order_pass
 
 # Extra Envs
 extraEnv:

@@ -48,10 +48,6 @@ hpa:
   memory:
     averageUtilization: 80
 
-# DB Configuration
-db:
-  enabled: false
-
 # Extra Envs
 extraEnv:
   AUTH_URL: "http://auth:5001"

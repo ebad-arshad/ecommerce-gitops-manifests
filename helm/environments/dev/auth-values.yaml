@@ -54,12 +54,12 @@ hpa:
   memory:
     averageUtilization: 80
 
-# DB Configuration
-db:
-  enabled: true
-  user: auth_user
-  name: auth
-  password: auth_pass
+# # DB Configuration
+# db:
+#   enabled: true
+#   user: auth_user
+#   name: auth
+#   password: auth_pass
 
-# Extra Envs
-# extraEnv:
+# # Extra Envs
+# # extraEnv:
