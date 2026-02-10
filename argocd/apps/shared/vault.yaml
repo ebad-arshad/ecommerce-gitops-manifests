@@ -13,13 +13,33 @@ spec:
       values: |
         server:
           dev:
+            enabled: false
+          
+          dataStorage:
             enabled: true
-            devRootToken: "root"
+            size: 2Gi
+            storageClass: "local-path"
+            mountPath: "/vault/data"
+
+          standalone:
+            enabled: true
+            config: |
+              ui = true
+              listener "tcp" {
+                tls_disable = 1
+                address = "[::]:8200"
+                cluster_address = "[::]:8201"
+              }
+              storage "file" {
+                path = "/vault/data"
+              }
+
           ingress:
             enabled: true
             ingressClassName: nginx
             hosts:
               - host: vault.local
+
   destination:
     server: https://kubernetes.default.svc
     namespace: vault
