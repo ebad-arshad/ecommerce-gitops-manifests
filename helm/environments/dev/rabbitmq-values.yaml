@@ -4,8 +4,11 @@ rabbitmq:
     repository: bitnamilegacy/rabbitmq    
 
   auth:
-    username: "user"
-    password: "password"
+    username: "broker_admin"
+    existingPasswordSecret: "rabbitmq-credentials"
+    existingErlangSecret: "rabbitmq-credentials"
+    existingErlangSecretKey: "rabbitmq-erlang-cookie"
+
   global:
     security:
       allowInsecureImages: true
@@ -17,6 +20,11 @@ rabbitmq:
     storageClass: "local-path"
     size: 2Gi
     accessMode: ReadWriteOnce
+  
+  containerSecurityContext:
+    enabled: true
+    runAsUser: 1001
+    runAsNonRoot: true
 
   resources:
     limits:
