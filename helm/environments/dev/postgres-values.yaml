@@ -8,7 +8,7 @@ postgresql:
           username: "user"
           existingSecret: "postgres-init-secrets"
           secretKeys:
-            adminPasswordKey: "postgres-password"
+            adminPasswordKey: "POSTGRESQL_PASSWORD"
 
   persistence:
     enabled: true
@@ -20,11 +20,10 @@ postgresql:
     extraEnvVarsSecret: "postgres-init-secrets"
     initdb:
       scripts:
-          # export PGPASSWORD="$POSTGRES_PASSWORD"
         init.sh: |
           #!/bin/bash
           set -e
-          export PGPASSWORD="$POSTGRES_POSTGRES_PASSWORD"
+          export PGPASSWORD="$POSTGRESQL_PASSWORD"
           psql -v ON_ERROR_STOP=1 --username "postgres" --dbname "postgres" <<-EOSQL
             -- AUTH SERVICE
             CREATE USER auth_user WITH PASSWORD '${AUTH_PASS}';
