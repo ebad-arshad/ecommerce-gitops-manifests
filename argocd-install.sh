@@ -9,7 +9,7 @@ helm repo update
 helm upgrade --install argocd argo/argo-cd \
   -n $NAMESPACE \
   --create-namespace \
-  -f argocd-values.yaml
+  -f ./argocd-values.yaml
 
 until kubectl get secret $SECRET_NAME -n $NAMESPACE > /dev/null 2>&1; do
   echo "waiting for secret to generate..."
@@ -27,3 +27,6 @@ ADMIN_PASSWORD=$(kubectl get secret $SECRET_NAME -n $NAMESPACE -o jsonpath="{.da
 echo "---------------------------------------------------"
 echo "ArgoCD Admin Password: $ADMIN_PASSWORD"
 echo "---------------------------------------------------"
+
+# kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+# kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
