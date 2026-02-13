@@ -1,7 +1,6 @@
 # Replica and History Settings
 replicaCount: 1
 revisionHistoryLimit: 3
-
 # Init Container
 initContainers:
   enabled: true
@@ -11,21 +10,17 @@ initContainers:
     - sh
     - -c
     - "until nc -zv postgresql 5432; do echo waiting for db; sleep 2; done;"
-
 # Image Settings
 image:
-  name: "ebadarshad/prod-auth:v1.0.0"
+  name: "ebadarshad/prod-auth:v2.0.0"
   pullPolicy: IfNotPresent
-
 # Networking
 service:
   port: 5001
-
 # Ingress Settings
 ingress:
   enabled: false
   # path: /dev(/|$)(.*) 
-
 # Resources (Must be set for HPA to work)
 resources:
   requests:
@@ -34,7 +29,6 @@ resources:
   limits:
     cpu: "500m"
     memory: "256Mi"
-
 # Health Checks (Probes)
 probes:
   startupPath: "/healthz"
@@ -43,7 +37,6 @@ probes:
   livenessDelay: 15
   readinessPath: "/healthz"
   readinessDelay: 5
-
 # Horizontal Pod Autoscaler
 hpa:
   enabled: true
