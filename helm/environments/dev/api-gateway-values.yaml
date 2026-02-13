@@ -1,25 +1,20 @@
 # Replica and History Settings
 replicaCount: 1
 revisionHistoryLimit: 3
-
 # Init Container
 initContainers:
   enabled: false
-
 # Image Settings
 image:
-  name: "ebadarshad/prod-api-gateway:v1.0.0" # repository:tag
+  name: "ebadarshad/prod-api-gateway:v2.0.0" # repository:tag
   pullPolicy: IfNotPresent
-
 # Networking
 service:
   port: 5000
-
 # Ingress Settings
 ingress:
   enabled: true
-  path: /dev(/|$)(.*) 
-
+  path: /dev(/|$)(.*)
 # Resources (Must be set for HPA to work)
 resources:
   requests:
@@ -28,7 +23,6 @@ resources:
   limits:
     cpu: "500m"
     memory: "256Mi"
-
 # Health Checks (Probes)
 probes:
   startupPath: "/apis/healthz"
@@ -37,7 +31,6 @@ probes:
   livenessDelay: 15
   readinessPath: "/apis/healthz"
   readinessDelay: 5
-
 # Horizontal Pod Autoscaler
 hpa:
   enabled: true # Required for your 'if not' logic in Deployment
@@ -47,7 +40,6 @@ hpa:
     averageUtilization: 70
   memory:
     averageUtilization: 80
-
 # Extra Envs
 extraEnv:
   AUTH_URL: "http://auth:5001"
