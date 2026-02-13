@@ -27,6 +27,3 @@ ADMIN_PASSWORD=$(kubectl get secret $SECRET_NAME -n $NAMESPACE -o jsonpath="{.da
 echo "---------------------------------------------------"
 echo "ArgoCD Admin Password: $ADMIN_PASSWORD"
 echo "---------------------------------------------------"
-
-# kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
-# kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
