@@ -1,3 +1,5 @@
+![architecture guide](architecture.png)
+
 # eCommerce GitOps Manifests
 
 This repository contains the GitOps manifests for deploying a microservices-based eCommerce application on Kubernetes. It utilizes **ArgoCD** for continuous delivery and **HashiCorp Vault** for secret management.
