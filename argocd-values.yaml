@@ -2,18 +2,20 @@ global:
   domain: argocd.local
 
 server:
+  extraArgs:
+    - --insecure
   ingress:
     enabled: true
-    ingressClassName: nginx
+    ingressClassName: traefik
     annotations:
-      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/hsts: "false"
+      traefik.ingress.kubernetes.io/service.serversscheme: http
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
       - argocd.local
     paths:
       - /
-
+      
 repoServer:
   livenessProbe:
     enabled: true
