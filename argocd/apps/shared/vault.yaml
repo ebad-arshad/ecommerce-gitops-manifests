@@ -36,9 +36,11 @@ spec:
 
           ingress:
             enabled: true
-            ingressClassName: nginx
+            ingressClassName: traefik
             hosts:
               - host: vault.local
+            activeService: false
+
 
   destination:
     server: https://kubernetes.default.svc
