@@ -46,3 +46,17 @@ hpa:
     averageUtilization: 70
   memory:
     averageUtilization: 80
+
+extraEnv:
+  # 1. TELL THE CODE WHERE THE DB LIVES
+  DB_HOST: "postgresql"
+  DB_PORT: "5432"
+  DB_USER: "auth_user"           # Change to your specific DB admin user if different
+  DB_NAME: "auth"          # Change to your specific database name
+  
+  # 2. MATCH THE VAULT SECRET PROPERTIES WE RETRIEVED (MAPPED TO THE CONTAINER SCRIPT EXPECTATIONS)
+  # If your base chart requires mapping keys manually from a secret, map them here:
+  DB_PASSWORD:
+    secretKeyRef:
+      name: postgres-init-secrets
+      key: AUTH_PASS   
