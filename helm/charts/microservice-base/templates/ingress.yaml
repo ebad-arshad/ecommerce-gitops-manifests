@@ -3,8 +3,6 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: {{ .Release.Name }}-strip-prefix
-  labels:
-    {{- include "common.labels" . | nindent 4 }} # Optional: Adjust to match your chart's labels
 spec:
   stripPrefix:
     prefixes:
