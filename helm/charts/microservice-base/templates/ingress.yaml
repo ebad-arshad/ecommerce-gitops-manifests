@@ -9,6 +9,7 @@ spec:
   stripPrefix:
     prefixes:
       - {{ .Values.ingress.path | quote }}
+{{- end }}
 ---
 
 {{- if .Values.ingress.enabled -}}
